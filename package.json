@@ -1,0 +1,19 @@
+{
+  "name": "visualartgenerator",
+  "version": "1.0.0",
+  "main": "index.js",
+ "scripts": {
+  "dev": "nodemon server.js"
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "puppeteer": "^24.9.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "description": ""
+}
