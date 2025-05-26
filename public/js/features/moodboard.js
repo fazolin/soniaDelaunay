@@ -15,8 +15,20 @@ export function renderSidebar(container) {
 
     <button id="btn-generate-grid">Regenerate Grid</button>
     <button id="btn-generate-moodboard">Generate Moodboard</button>
-    <button id="btn-export">Export Moodboard</button>
+    <button id="btn-export" disabled class="disabled">Export Moodboard</button>
   `;
+
+  const exportBtn = document.getElementById("btn-export");
+
+  const disableExport = () => {
+    exportBtn.disabled = true;
+    exportBtn.classList.add("disabled");
+  };
+
+  const enableExport = () => {
+    exportBtn.disabled = false;
+    exportBtn.classList.remove("disabled");
+  };
 
   const regenerate = () => {
     const width = parseInt(document.getElementById("input-width").value, 10);
@@ -31,6 +43,9 @@ export function renderSidebar(container) {
       detail: { width, height, density, keyword },
     });
     window.dispatchEvent(event);
+
+    // Desabilita o botão de exportação ao regenerar o grid
+    disableExport();
   };
 
   ["input-width", "input-height", "input-density"].forEach((id) => {
@@ -122,6 +137,9 @@ export function renderSidebar(container) {
             });
           })
         );
+
+        // Habilita o botão de exportação após a geração do moodboard
+        enableExport();
       } catch (err) {
         console.error("Erro ao buscar imagens:", err);
         container.innerHTML = `<p style="color:red;">Erro ao buscar imagens. Verifique o servidor.</p>`;
@@ -132,6 +150,9 @@ export function renderSidebar(container) {
     const event = new Event("export-moodboard");
     window.dispatchEvent(event);
   });
+
+  // Desabilita o botão de exportação ao carregar a página
+  disableExport();
 
   regenerate();
 }
